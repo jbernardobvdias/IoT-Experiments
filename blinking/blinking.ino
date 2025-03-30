@@ -1,3 +1,8 @@
+// blinking.ino
+//
+// This program alternates two LEDs connected to pins 12 and 13.
+// Each LED turns on for 1 second while the other turns off, creating a blinking effect.
+
 #define LEDU 13  // Define LEDU as pin 13
 #define LEDD 12  // Define LEDD as pin 12
 
