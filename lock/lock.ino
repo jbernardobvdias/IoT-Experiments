@@ -38,10 +38,12 @@ void loop() {
       delay(1000);  
       
       // Check if correct button is pressed
-      if (checkInputs(i)) {
+      int res = checkInputs(i);
+      if (res == 1) {
         break;
-      } else {
+      } else if (res == 0) {
         i = -1;  // Reset code entry on incorrect input
+        break;
       }
     }
   }
@@ -54,19 +56,19 @@ void loop() {
 }
 
 // Function to check button inputs
-bool checkInputs(int i) {
+int checkInputs(int i) {
   for (int j = 0; j < PINSNUM; j++) {
     if (digitalRead(PINS[j]) == HIGH) {  // If a button is pressed
-      
-      if (PINS[j] - MINPIN == CODE[i]) {  // Check if it matches the expected code sequence
-        blinkLEDRight(); // Indicate correct input
-        return true;
+      if (PINS[j] - MINPIN == CODE[i]) {  // Check if it matches expected code sequence
+        blinkLEDRight();
+        return 1;
       } else {
-        blinkLEDWrong(); // Indicate incorrect input
-        return false;
+        blinkLEDWrong();
+        return 0;
       }
     }
   }
+  return 2; // No input detected
 }
 
 // Function to blink LED for incorrect input
